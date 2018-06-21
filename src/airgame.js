@@ -4,7 +4,9 @@ import Matter from 'matter-js';
 let Engine = Matter.Engine,
     Render = Matter.Render,
     World = Matter.World,
-    Bodies = Matter.Bodies;
+    Bodies = Matter.Bodies,
+    Body = Matter.Body,
+    Events = Matter.Events;
 
 let engine = Engine.create();
     engine.world.gravity.y = 0;
@@ -23,10 +25,12 @@ let render = Render.create({
     }
 });
 
-let puck = Bodies.circle(dimensions.width * 0.5, dimensions.height * 0.5, 40, { friction: 0, frictionAir: 0 });
+Events.on(engine, 'collisionStart', collision_detection);
 
-let player1 = Bodies.circle(dimensions.width * 0.2, dimensions.height * 0.5, 25);
-let player2 = Bodies.circle(dimensions.width * 0.8, dimensions.height * 0.5, 25);
+let puck = Bodies.circle(dimensions.width * 0.5, dimensions.height * 0.5, 40, { label: 'puck', friction: 0, frictionAir: 0, speed: 0 });
+
+let player1 = Bodies.circle(dimensions.width * 0.2, dimensions.height * 0.5, 25, { label: 'player1', isStatic: true });
+let player2 = Bodies.circle(dimensions.width * 0.8, dimensions.height * 0.5, 25, { label: 'player2', isStatic: true });
 
 let arenat = Bodies.rectangle(dimensions.width * 0.5, 0-10, dimensions.width+10, 60, { isStatic: true });
 let arenab = Bodies.rectangle(dimensions.width * 0.5, dimensions.height+10, dimensions.width+10, 60, { isStatic: true });
@@ -44,4 +48,21 @@ export {
     Matter,
     player1,
     player2
+}
+
+
+
+
+//collisions
+function collision_detection(event) {
+    var i, pair,
+        length = event.pairs.length;
+    for (i = 0; i < length; i++) {
+        pair = event.pairs[i];
+        if (pair.bodyA.label === 'player1' || pair.bodyB.label === 'player1') {
+            var vecNorm = Matter.Vector.normalise(Matter.Vector.sub(player1.position, puck.position));
+            console.log(vecNorm)
+            Body.setVelocity(puck, { x: vecNorm.x * -puck.speed, y: vecNorm.y * -(puck.speed + 1.0) });
+        }
+    }
 }

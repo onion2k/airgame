@@ -12,10 +12,3 @@ function update() {
 }
 
 requestAnimationFrame(update);
-
-
-// let force = 10;
-// let deltaVector = Matter.Vector.sub(mouse.position, myBody.position);
-// let normalizedDelta = Matter.Vector.normalise(vector);
-// let forceVector = Matter.Vector.mult(deltaVector, 10);
-// Body.applyForce(myBody, myBody.position, forceVector);
