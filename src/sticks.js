@@ -48,30 +48,30 @@ export default class Sticks {
     sticks() {
         this.state.touches.forEach((t)=>{
 
-                this.controllerCtx.strokeStyle = '#ddd';
-                this.controllerCtx.lineWidth = 3;
-                this.controllerCtx.beginPath();
-                this.controllerCtx.moveTo(t.ix, t.iy);
-                this.controllerCtx.lineTo(t.cx, t.cy);
-                this.controllerCtx.stroke();
+            this.controllerCtx.strokeStyle = '#ddd';
+            this.controllerCtx.lineWidth = 3;
+            this.controllerCtx.beginPath();
+            this.controllerCtx.moveTo(t.ix, t.iy);
+            this.controllerCtx.lineTo(t.cx, t.cy);
+            this.controllerCtx.stroke();
 
-                this.controllerCtx.fillStyle = 'rgba(0,0,0,0.5)';
-                this.controllerCtx.beginPath();
-                this.controllerCtx.arc(t.cx, t.cy, 5, 0, 2*Math.PI);
-                this.controllerCtx.fill();
+            this.controllerCtx.fillStyle = 'rgba(0,0,0,0.5)';
+            this.controllerCtx.beginPath();
+            this.controllerCtx.arc(t.cx, t.cy, 5, 0, 2*Math.PI);
+            this.controllerCtx.fill();
 
-                this.controllerCtx.fillStyle = '#8f8';
-                if (t.ix > this.dimensions.width * 0.5) {
-                    this.controllerCtx.fillStyle = '#f88';
-                }
-    
-                this.controllerCtx.beginPath();
-                this.controllerCtx.arc(t.x, t.y, 25, 0, 2*Math.PI);
-                this.controllerCtx.fill();
-    
-                this.controllerCtx.strokeStyle = '#444';
-                this.controllerCtx.lineWidth = 2;
-                this.controllerCtx.stroke();
+            this.controllerCtx.fillStyle = '#8f8';
+            if (t.ix > this.dimensions.width * 0.5) {
+                this.controllerCtx.fillStyle = '#f88';
+            }
+
+            this.controllerCtx.beginPath();
+            this.controllerCtx.arc(t.x, t.y, 25, 0, 2*Math.PI);
+            this.controllerCtx.fill();
+
+            this.controllerCtx.strokeStyle = '#444';
+            this.controllerCtx.lineWidth = 2;
+            this.controllerCtx.stroke();
 
           });
     }
