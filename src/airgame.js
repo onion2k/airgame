@@ -27,10 +27,10 @@ let render = Render.create({
 
 Events.on(engine, 'collisionStart', collision_detection);
 
-let puck = Bodies.circle(dimensions.width * 0.5, dimensions.height * 0.5, 40, { label: 'puck', friction: 0, frictionAir: 0, speed: 0 });
+let puck = Bodies.circle(dimensions.width * 0.5, dimensions.height * 0.5, 40, { label: 'puck', friction: 0, frictionAir: 0.005, speed: 0, restitution: 0.95 });
 
-let player1 = Bodies.circle(dimensions.width * 0.2, dimensions.height * 0.5, 25, { label: 'player1', isStatic: true });
-let player2 = Bodies.circle(dimensions.width * 0.8, dimensions.height * 0.5, 25, { label: 'player2', isStatic: true });
+let player1 = Bodies.circle(dimensions.width * 0.2, dimensions.height * 0.5, 25, { label: 'player', isStatic: true });
+let player2 = Bodies.circle(dimensions.width * 0.8, dimensions.height * 0.5, 25, { label: 'player', isStatic: true });
 
 let arenat = Bodies.rectangle(dimensions.width * 0.5, 0-10, dimensions.width+10, 60, { isStatic: true });
 let arenab = Bodies.rectangle(dimensions.width * 0.5, dimensions.height+10, dimensions.width+10, 60, { isStatic: true });
@@ -50,19 +50,15 @@ export {
     player2
 }
 
-
-
-
 //collisions
 function collision_detection(event) {
     var i, pair,
         length = event.pairs.length;
     for (i = 0; i < length; i++) {
         pair = event.pairs[i];
-        if (pair.bodyA.label === 'player1' || pair.bodyB.label === 'player1') {
+        if (pair.bodyA.label === 'player' || pair.bodyB.label === 'player') {
             var vecNorm = Matter.Vector.normalise(Matter.Vector.sub(player1.position, puck.position));
-            console.log(vecNorm)
-            Body.setVelocity(puck, { x: vecNorm.x * -puck.speed, y: vecNorm.y * -(puck.speed + 1.0) });
+            Body.setVelocity(puck, { x: vecNorm.x * -(puck.speed + 5.0), y: vecNorm.y * -(puck.speed + 5.0) });
         }
     }
 }
