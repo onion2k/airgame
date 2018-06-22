@@ -61,6 +61,7 @@ export default class Sticks {
             this.controllerCtx.fill();
 
             this.controllerCtx.fillStyle = '#8f8';
+
             if (t.ix > this.dimensions.width * 0.5) {
                 this.controllerCtx.fillStyle = '#f88';
             }
@@ -78,42 +79,46 @@ export default class Sticks {
 
     attach(){
 
-        this.controllerEl.addEventListener('mousedown', (e) => {
-            e.preventDefault();
-            this.state.touches.push({
-                identifier: 0,
-                ix: e.pageX,
-                iy: e.pageY,
-                x: e.pageX,
-                y: e.pageY
-            });
-        });
+        // this.controllerEl.addEventListener('mousedown', (e) => {
+        //     e.preventDefault();
+        //     this.state.touches.push({
+        //         identifier: 0,
+        //         ix: e.pageX,
+        //         iy: e.pageY,
+        //         x: e.pageX,
+        //         y: e.pageY
+        //     });
+        // });
 
-        this.controllerEl.addEventListener('mousemove', (e) => {
-            e.preventDefault();
-            if (this.state.touches.length > 0) {
-                this.state.touches[0].x = e.pageX;
-                this.state.touches[0].y = e.pageY;
-            }
-        });
+        // this.controllerEl.addEventListener('mousemove', (e) => {
+        //     e.preventDefault();
+        //     if (this.state.touches.length > 0) {
+        //         this.state.touches[0].x = e.pageX;
+        //         this.state.touches[0].y = e.pageY;
+        //     }
+        // });
 
-        this.controllerEl.addEventListener('mouseup', (e) => {
-            e.preventDefault();
-            this.state.touches = [];
-        });
+        // this.controllerEl.addEventListener('mouseup', (e) => {
+        //     e.preventDefault();
+        //     this.state.touches = [];
+        // });
 
         this.controllerEl.addEventListener('touchstart', (e) => {
             e.preventDefault();
             for (let i = 0; i < e.changedTouches.length; i++) {
+                let player = 1;
+                if (e.changedTouches[i].pageX > this.dimensions.width * 0.5) {
+                    player = 2;
+                }
                 this.state.touches.push({
                     identifier: e.changedTouches[i].identifier,
                     ix: e.changedTouches[i].pageX,
                     iy: e.changedTouches[i].pageY,
                     x: e.changedTouches[i].pageX,
-                    y: e.changedTouches[i].pageY
+                    y: e.changedTouches[i].pageY,
+                    player: player
                 });
             }
-
         });
         this.controllerEl.addEventListener('touchmove', (e) => {
             e.preventDefault();

@@ -21,7 +21,8 @@ let render = Render.create({
         width: dimensions.width,
         height: dimensions.height,
         showVelocity: true,
-        showAngleIndicator: true
+        showAngleIndicator: true,
+        wireframes: false
     }
 });
 
@@ -32,7 +33,7 @@ let puck = Bodies.circle(dimensions.width * 0.5, dimensions.height * 0.5, 40, { 
 let player1 = Bodies.circle(dimensions.width * 0.2, dimensions.height * 0.5, 25, { label: 'player', isStatic: true });
 let player2 = Bodies.circle(dimensions.width * 0.8, dimensions.height * 0.5, 25, { label: 'player', isStatic: true });
 
-let arenat = Bodies.rectangle(dimensions.width * 0.5, 0-10, dimensions.width+10, 60, { isStatic: true });
+let arenat = Bodies.rectangle(dimensions.width * 0.5, 0 - 10, dimensions.width + 10, 60, { isStatic: true });
 let arenab = Bodies.rectangle(dimensions.width * 0.5, dimensions.height+10, dimensions.width+10, 60, { isStatic: true });
 
 // add all of the bodies to the world
@@ -58,7 +59,7 @@ function collision_detection(event) {
         pair = event.pairs[i];
         if (pair.bodyA.label === 'player' || pair.bodyB.label === 'player') {
             var vecNorm = Matter.Vector.normalise(Matter.Vector.sub(player1.position, puck.position));
-            Body.setVelocity(puck, { x: vecNorm.x * -(puck.speed + 5.0), y: vecNorm.y * -(puck.speed + 5.0) });
+            Body.setVelocity(puck, { x: vecNorm.x * -(puck.speed + 2.0), y: vecNorm.y * -(puck.speed + 2.0) });
         }
     }
 }
