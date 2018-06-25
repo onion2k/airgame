@@ -1,5 +1,5 @@
 
-export default class fullscreen {
+export default class Fullscreen {
 
     init(){
         
@@ -19,6 +19,10 @@ export default class fullscreen {
         overlay.textContent = "Press to go fullscreen";
 
         document.body.appendChild(overlay);
+
+        overlay.addEventListener('click', (e)=>{
+            document.body.removeChild(overlay);
+        });
 
     }
 

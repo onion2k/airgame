@@ -1,12 +1,12 @@
 
+import Fullscreen from './fullscreen';
 import Sticks from './sticks';
-import fullscreen from './fullscreen';
 import { Matter, player1, player2 } from './airgame';
 
-const c = new Sticks('controller');
+const sticks = new Sticks('controller');
 
 function update() {
-    c.state.touches.forEach((t,i)=>{
+    sticks.state.touches.forEach((t,i)=>{
         if (t.player === 1) {
             Matter.Body.setPosition(player1, { x: t.x, y: t.y });
         } else {
@@ -18,5 +18,5 @@ function update() {
 
 requestAnimationFrame(update);
 
-const f = new fullscreen();
+const f = new Fullscreen();
 f.init();
