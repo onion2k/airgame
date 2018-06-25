@@ -1,7 +1,7 @@
 
 import Fullscreen from './fullscreen';
-import Sticks from './sticks';
 import { Matter, player1, player2 } from './airgame';
+import Sticks from './sticks';
 
 const sticks = new Sticks();
       sticks.init('controller');
@@ -19,5 +19,5 @@ function update() {
 
 requestAnimationFrame(update);
 
-const f = new Fullscreen();
+const f = new Fullscreen('world');
       f.init();

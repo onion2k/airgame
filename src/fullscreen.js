@@ -1,6 +1,10 @@
 
 export default class Fullscreen {
 
+    constructor(fsEl){
+        this.fsEl = document.getElementById(fsEl);
+    }
+
     init(){
         
         const overlay = document.createElement('div');
@@ -9,6 +13,7 @@ export default class Fullscreen {
         overlay.style['color'] = '#fff';
 
         overlay.style['position'] = 'absolute';
+        overlay.style['zIndex'] = 9;
 
         overlay.style['display'] = 'grid';
         overlay.style['width'] = '100vw';
@@ -21,6 +26,7 @@ export default class Fullscreen {
         document.body.appendChild(overlay);
 
         overlay.addEventListener('click', (e)=>{
+            this.fsEl.webkitRequestFullscreen();
             document.body.removeChild(overlay);
         });
 

@@ -11,6 +11,9 @@
                 width: 100vw;
                 height: 100vh;
             }
+            #controller {
+                z-index: 5;
+            }
             canvas {
                 position: absolute;
                 width: 100vw;
@@ -20,8 +23,8 @@
     </head>
 <body>
     <div id="world">
+        <canvas id="controller"></canvas>
     </div>
-    <canvas id="controller"></canvas>
     <script src="./index.js"></script>
 </body>
 </html>
