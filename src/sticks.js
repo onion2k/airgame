@@ -1,7 +1,7 @@
 
 export default class Sticks {
 
-    constructor(id){
+    init(id){
 
         this.state = {
             touches: []
