@@ -40,8 +40,10 @@ export default class Fullscreen {
     toggleFullscreen() {
         if (fscreen.fullscreenElement !== null) {
           console.log('Entered fullscreen mode');
+          // add an exit button at players corner
         } else {
           console.log('Exited fullscreen mode');
+          // remove exit button at players corner
         }
     }
 
