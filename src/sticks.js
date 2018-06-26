@@ -4,7 +4,8 @@ export default class Sticks {
     init(id){
 
         this.state = {
-            touches: []
+            touches: [],
+            size: 40
         };
 
         this.controllerEl = document.getElementById(id);
@@ -57,7 +58,7 @@ export default class Sticks {
 
             this.controllerCtx.fillStyle = 'rgba(0,0,0,0.5)';
             this.controllerCtx.beginPath();
-            this.controllerCtx.arc(t.cx, t.cy, 5, 0, 2*Math.PI);
+            this.controllerCtx.arc(t.cx, t.cy, this.state.size, 0, 2*Math.PI);
             this.controllerCtx.fill();
 
             this.controllerCtx.fillStyle = '#8f8';
@@ -67,7 +68,7 @@ export default class Sticks {
             }
 
             this.controllerCtx.beginPath();
-            this.controllerCtx.arc(t.x, t.y, 25, 0, 2*Math.PI);
+            this.controllerCtx.arc(t.x, t.y, this.state.size, 0, 2*Math.PI);
             this.controllerCtx.fill();
 
             this.controllerCtx.strokeStyle = '#444';
@@ -114,6 +115,8 @@ export default class Sticks {
                     identifier: e.changedTouches[i].identifier,
                     ix: e.changedTouches[i].pageX,
                     iy: e.changedTouches[i].pageY,
+                    px: e.changedTouches[i].pageX,
+                    py: e.changedTouches[i].pagey,
                     x: e.changedTouches[i].pageX,
                     y: e.changedTouches[i].pageY,
                     player: player
@@ -129,6 +132,8 @@ export default class Sticks {
                         index = j;
                     }
                 }
+                this.state.touches[index].px = this.state.touches[index].x;
+                this.state.touches[index].py = this.state.touches[index].y;
                 this.state.touches[index].x = e.changedTouches[i].pageX;
                 this.state.touches[index].y = e.changedTouches[i].pageY;
             }

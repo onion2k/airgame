@@ -1,4 +1,6 @@
 
+import fscreen from 'fscreen';
+
 export default class Fullscreen {
 
     constructor(fsEl){
@@ -26,10 +28,21 @@ export default class Fullscreen {
         document.body.appendChild(overlay);
 
         overlay.addEventListener('click', (e)=>{
-            this.fsEl.webkitRequestFullscreen();
+            if (fscreen.fullscreenEnabled) {
+                fscreen.addEventListener('fullscreenchange', this.toggleFullscreen.bind(this), false);
+                fscreen.requestFullscreen(this.fsEl);
+            }
             document.body.removeChild(overlay);
         });
 
+    }
+
+    toggleFullscreen() {
+        if (fscreen.fullscreenElement !== null) {
+          console.log('Entered fullscreen mode');
+        } else {
+          console.log('Exited fullscreen mode');
+        }
     }
 
 }
