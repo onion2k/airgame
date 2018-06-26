@@ -11,6 +11,7 @@ let Engine = Matter.Engine,
     Events = Matter.Events;
 
 let engine = Engine.create();
+    engine.world.gravity.x = 0;
     engine.world.gravity.y = 0;
 
 let world = document.getElementById('world');
@@ -35,8 +36,11 @@ let puck = Bodies.circle(dimensions.width * 0.5, dimensions.height * 0.5, 40, { 
 let player1 = Bodies.circle(dimensions.width * 0.2, dimensions.height * 0.5, size, { label: 'player1', isStatic: true });
 let player2 = Bodies.circle(dimensions.width * 0.8, dimensions.height * 0.5, size, { label: 'player2', isStatic: true });
 
+// remove the top and bottom and replace with world boundaries?
 let arenat = Bodies.rectangle(dimensions.width * 0.5, 0 - 10, dimensions.width + 10, 60, { isStatic: true });
 let arenab = Bodies.rectangle(dimensions.width * 0.5, dimensions.height+10, dimensions.width+10, 60, { isStatic: true });
+
+//add 'goals' aka sensors that increment scores and reset the puck
 
 // add all of the bodies to the world
 World.add(engine.world, [puck,player1,player2,arenat,arenab]);
@@ -49,7 +53,7 @@ Render.run(render);
 
 function updatePlayer(player, pos, m){
 
-    player.m = m;
+    player.m = m; // could replace with magnitude?
     Matter.Body.setPosition(player, pos);
 
 }
