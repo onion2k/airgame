@@ -1,10 +1,14 @@
+import Matter from 'matter-js';
 
-import Fullscreen from './fullscreen';
-// Should really export a game class with public API
-import { Matter, player1, player2, updatePlayer } from './airgame';
-import Sticks from './sticks';
+// import Fullscreen from './fullscreen';
 
-const sticks = new Sticks();
+import Airgame from './classes/airgame.js';
+import Sticks from './classes/sticks.js';
+
+const game = new Airgame;
+      game.init('world');
+
+const sticks = new Sticks;
       sticks.init('controller');
 
 function update() {
@@ -12,10 +16,10 @@ function update() {
         if (t.player === 1) {
             // Just call the update player API
             let m = Math.abs(Matter.Vector.cross({ x: t.px, y: t.py }, { x: t.x, y: t.y }));
-            updatePlayer(player1, { x: t.x, y: t.y }, m);
+            game.updatePlayer(game.player1, { x: t.x, y: t.y }, m);
         } else {
             let m = Math.abs(Matter.Vector.cross({ x: t.px, y: t.py }, { x: t.x, y: t.y }));
-            updatePlayer(player2, { x: t.x, y: t.y }, m);
+            game.updatePlayer(game.player2, { x: t.x, y: t.y }, m);
         }
     });
     requestAnimationFrame(update);
