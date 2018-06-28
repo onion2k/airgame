@@ -46,13 +46,6 @@ export default class Airgame {
         Events.on(this.engine, 'collisionStart', this.collision_detection.bind(this));
     }
 
-    updatePlayer(player, pos, ppos){
-        let m = Math.abs(Matter.Vector.cross({ x: pos.x, y: pos.y }, { x: ppos.x, y: ppos.y }));
-
-        player.m = m; // could replace with magnitude?
-        Matter.Body.setPosition(player, pos);
-    }
-
     start(){
 
         this.puck = Bodies.circle(this.dimensions.width * 0.5, this.dimensions.height * 0.5, 40, { label: 'puck', friction: 0, frictionAir: 0.005, speed: 0, restitution: 0.95 });
@@ -94,6 +87,13 @@ export default class Airgame {
         
         // run the renderer
         Render.run(this.render); 
+    }
+
+    updatePlayer(player, pos, ppos){
+        let m = Math.abs(Matter.Vector.cross({ x: pos.x, y: pos.y }, { x: ppos.x, y: ppos.y }));
+
+        player.m = m; // could replace with magnitude?
+        Matter.Body.setPosition(player, pos);
     }
 
     collision_detection(event) {
