@@ -19,8 +19,6 @@ export default class Airgame {
         this.world = document.getElementById(id);
         this.dimensions = this.world.getBoundingClientRect();
 
-        console.log(this.dimensions)
-
         this.engine = Engine.create();
         this.engine.world.gravity.x = 0;
         this.engine.world.gravity.y = 0;
@@ -39,8 +37,6 @@ export default class Airgame {
             options: {
                 width: this.dimensions.width,
                 height: this.dimensions.height,
-                showVelocity: true,
-                showAngleIndicator: true,
                 wireframes: false
             }
         });
@@ -69,9 +65,29 @@ export default class Airgame {
         this.arenab = Bodies.rectangle(this.dimensions.width * 0.5, this.dimensions.height+10, this.dimensions.width+10, 60, { isStatic: true });
         
         //add 'goals' aka sensors that increment scores and reset the puck
-        
+        this.redColor = '#C44D58',
+        this.greenColor = '#C7F464';
+
+        this.goal1 = Bodies.rectangle(-30, this.dimensions.height * 0.5, 30, this.dimensions.height+10, {
+            isSensor: true,
+            isStatic: true,
+            render: {
+                strokeStyle: this.redColor,
+                lineWidth: 2
+            }
+        });
+
+        this.goal2 = Bodies.rectangle(this.dimensions.width + 30, this.dimensions.height * 0.5, 30, this.dimensions.height+10, {
+            isSensor: true,
+            isStatic: true,
+            render: {
+                strokeStyle: this.redColor,
+                lineWidth: 2
+            }
+        });
+
         // add all of the bodies to the world
-        World.add(this.engine.world, [this.puck,this.player1,this.player2,this.arenat,this.arenab]);
+        World.add(this.engine.world, [this.puck,this.player1,this.player2,this.arenat,this.arenab,this.goal1,this.goal2]);
         
         // run the engine
         Engine.run(this.engine);
@@ -86,18 +102,21 @@ export default class Airgame {
         for (i = 0; i < length; i++) {
             pair = event.pairs[i];
             if (pair.bodyA.label === 'player1' || pair.bodyB.label === 'player1') {
-    
                 var vecNorm = Matter.Vector.normalise(Matter.Vector.sub(this.player1.position, this.puck.position));
                 let speed = -(this.puck.speed + Math.log(this.player1.m / 2));
                 if (!speed) { speed = -this.puck.speed; }
                 Body.setVelocity(this.puck, { x: vecNorm.x * speed, y: vecNorm.y * speed });
-    
             } else if (pair.bodyA.label === 'player2' || pair.bodyB.label === 'player2') {
                 var vecNorm = Matter.Vector.normalise(Matter.Vector.sub(this.player2.position, this.puck.position));
                 let speed = -(this.puck.speed + Math.log(this.player2.m / 2));
                 if (!speed) { speed = -this.puck.speed; }
                 Body.setVelocity(this.puck, { x: vecNorm.x * speed, y: vecNorm.y * speed });
-    
+            } else {
+                if (pair.bodyA === this.puck) {
+                    pair.bodyB.render.strokeStyle = this.greenColor;
+                } else if (pair.bodyB === this.puck) {
+                    pair.bodyA.render.strokeStyle = this.greenColor;
+                }
             }
         }
     }
