@@ -1,4 +1,4 @@
-import Matter from 'matter-js';
+// import Matter from 'matter-js';
 
 // import Fullscreen from './fullscreen';
 
@@ -15,11 +15,9 @@ function update() {
     sticks.state.touches.forEach((t,i)=>{
         if (t.player === 1) {
             // Just call the update player API
-            let m = Math.abs(Matter.Vector.cross({ x: t.px, y: t.py }, { x: t.x, y: t.y }));
-            game.updatePlayer(game.player1, { x: t.x, y: t.y }, m);
+            game.updatePlayer(game.player1, { x: t.x, y: t.y }, { x: t.px, y: t.py });
         } else {
-            let m = Math.abs(Matter.Vector.cross({ x: t.px, y: t.py }, { x: t.x, y: t.y }));
-            game.updatePlayer(game.player2, { x: t.x, y: t.y }, m);
+            game.updatePlayer(game.player2, { x: t.x, y: t.y }, { x: t.px, y: t.py });
         }
     });
     requestAnimationFrame(update);
