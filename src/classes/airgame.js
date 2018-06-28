@@ -14,6 +14,8 @@ export default class Airgame {
 
     init(id) {
 
+        this.state = {};
+
         this.size = 40;
 
         this.world = document.getElementById(id);
@@ -25,6 +27,7 @@ export default class Airgame {
 
         this.initRenderer();
         this.initEvents();
+        this.initScores();
 
         this.start();
 
@@ -46,6 +49,10 @@ export default class Airgame {
         Events.on(this.engine, 'collisionStart', this.collision_detection.bind(this));
     }
 
+    initScores(){
+        console.log('scores');
+    }
+
     start(){
 
         this.puck = Bodies.circle(this.dimensions.width * 0.5, this.dimensions.height * 0.5, 40, { label: 'puck', friction: 0, frictionAir: 0.005, speed: 0, restitution: 0.95 });
@@ -62,6 +69,7 @@ export default class Airgame {
         this.greenColor = '#C7F464';
 
         this.goal1 = Bodies.rectangle(-30, this.dimensions.height * 0.5, 30, this.dimensions.height+10, {
+            label: 'goal1', 
             isSensor: true,
             isStatic: true,
             render: {
@@ -71,6 +79,7 @@ export default class Airgame {
         });
 
         this.goal2 = Bodies.rectangle(this.dimensions.width + 30, this.dimensions.height * 0.5, 30, this.dimensions.height+10, {
+            label: 'goal2', 
             isSensor: true,
             isStatic: true,
             render: {
@@ -111,14 +120,16 @@ export default class Airgame {
                 let speed = -(this.puck.speed + Math.log(this.player2.m / 2));
                 if (!speed) { speed = -this.puck.speed; }
                 Body.setVelocity(this.puck, { x: vecNorm.x * speed, y: vecNorm.y * speed });
-            } else {
-                if (pair.bodyA === this.puck) {
-                    pair.bodyB.render.strokeStyle = this.greenColor;
-                } else if (pair.bodyB === this.puck) {
-                    pair.bodyA.render.strokeStyle = this.greenColor;
-                }
+            } else if (pair.bodyA.label === 'goal1' || pair.bodyB.label === 'goal1') {
+                Matter.Body.setAngularVelocity(this.puck, 0);
+                Matter.Body.setVelocity(this.puck, {x: 0, y: 0});
+                Matter.Body.setPosition(this.puck, { x: this.dimensions.width * 0.5, y: this.dimensions.height * 0.5 });
+            } else if (pair.bodyA.label === 'goal2' || pair.bodyB.label === 'goal2') {
+                Matter.Body.setAngularVelocity(this.puck, 0);
+                Matter.Body.setVelocity(this.puck, {x: 0, y: 0});
+                Matter.Body.setPosition(this.puck, { x: this.dimensions.width * 0.5, y: this.dimensions.height * 0.5 });
             }
         }
     }
-    
-} 
+
+}
