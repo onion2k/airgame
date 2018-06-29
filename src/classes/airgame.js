@@ -1,6 +1,5 @@
 
 import Matter from 'matter-js';
-import renderer from './renderer';
 
 let Engine = Matter.Engine,
     Composite = Matter.Composite,
@@ -13,10 +12,10 @@ Matter.Resolver._restingThresh = 0.1;
 
 export default class Airgame {
 
-    constructor(){
+    constructor(renderer){
 
         this.render = this.render.bind(this);
-        this.renderer = new renderer();
+        this.renderer = renderer;
 
         this.time = 0;
 
@@ -41,18 +40,6 @@ export default class Airgame {
         requestAnimationFrame(this.render);
 
     }
-
-    // initRenderer() {
-    //     this.render = Render.create({
-    //         element: this.world,
-    //         engine: this.engine,
-    //         options: {
-    //             width: this.dimensions.width,
-    //             height: this.dimensions.height,
-    //             wireframes: false
-    //         }
-    //     });
-    // }
 
     initEvents(){
         Events.on(this.engine, 'collisionStart', this.collision_detection.bind(this));
@@ -107,6 +94,8 @@ export default class Airgame {
         let now = new Date().getTime(),
             dt = now - (this.time || now);
             this.time = now;
+
+        if (dt > 18) console.log(dt);
         
         Engine.update(this.engine, dt);
         let bodies = Composite.allBodies(this.engine.world);

@@ -7,7 +7,7 @@ export default class Fullscreen {
         this.fsEl = document.getElementById(fsEl);
     }
 
-    init(){
+    init(cb){
         
         const overlay = document.createElement('div');
 
@@ -35,15 +35,15 @@ export default class Fullscreen {
             document.body.removeChild(overlay);
         });
 
+        this.cb = cb;
+
     }
 
     toggleFullscreen() {
         if (fscreen.fullscreenElement !== null) {
-          console.log('Entered fullscreen mode');
-          // add an exit button at players corner
+          this.cb();
         } else {
-          console.log('Exited fullscreen mode');
-          // remove exit button at players corner
+
         }
     }
 
