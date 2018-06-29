@@ -1,8 +1,9 @@
 
 import Matter from 'matter-js';
+import renderer from './renderer';
 
 let Engine = Matter.Engine,
-    Render = Matter.Render,
+    Composite = Matter.Composite,
     World = Matter.World,
     Bodies = Matter.Bodies,
     Body = Matter.Body,
@@ -11,6 +12,15 @@ let Engine = Matter.Engine,
 Matter.Resolver._restingThresh = 0.1;
 
 export default class Airgame {
+
+    constructor(){
+
+        this.render = this.render.bind(this);
+        this.renderer = new renderer();
+
+        this.time = 0;
+
+    }
 
     init(id) {
 
@@ -25,35 +35,30 @@ export default class Airgame {
         this.engine.world.gravity.x = 0;
         this.engine.world.gravity.y = 0;
 
-        this.initRenderer();
         this.initEvents();
-        this.initScores();
+        this.initWorld();
 
-        this.start();
+        requestAnimationFrame(this.render);
 
     }
 
-    initRenderer() {
-        this.render = Render.create({
-            element: this.world,
-            engine: this.engine,
-            options: {
-                width: this.dimensions.width,
-                height: this.dimensions.height,
-                wireframes: false
-            }
-        });
-    }
+    // initRenderer() {
+    //     this.render = Render.create({
+    //         element: this.world,
+    //         engine: this.engine,
+    //         options: {
+    //             width: this.dimensions.width,
+    //             height: this.dimensions.height,
+    //             wireframes: false
+    //         }
+    //     });
+    // }
 
     initEvents(){
         Events.on(this.engine, 'collisionStart', this.collision_detection.bind(this));
     }
 
-    initScores(){
-        console.log('scores');
-    }
-
-    start(){
+    initWorld(){
 
         this.puck = Bodies.circle(this.dimensions.width * 0.5, this.dimensions.height * 0.5, 40, { label: 'puck', friction: 0, frictionAir: 0.005, speed: 0, restitution: 0.95 });
 
@@ -91,11 +96,22 @@ export default class Airgame {
         // add all of the bodies to the world
         World.add(this.engine.world, [this.puck,this.player1,this.player2,this.arenat,this.arenab,this.goal1,this.goal2]);
         
-        // run the engine
-        Engine.run(this.engine);
-        
         // run the renderer
-        Render.run(this.render); 
+        // Render.run(this.render); 
+    }
+
+    render(){
+
+        requestAnimationFrame(this.render);
+
+        let now = new Date().getTime(),
+            dt = now - (this.time || now);
+            this.time = now;
+        
+        Engine.update(this.engine, dt);
+        let bodies = Composite.allBodies(this.engine.world);
+
+        this.renderer.render(bodies);
     }
 
     updatePlayer(player, pos, ppos){
