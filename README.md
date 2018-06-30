@@ -16,7 +16,7 @@ Currently using the default matter-js renderer but that'll be replaced with a TW
 
 # Roadmap
 
-* Full screen mode
+* Full screen mode - Done
 * Wait for two players before interactive
 * Scores
 * Online play
