@@ -1,4 +1,8 @@
-// import Matter from 'matter-js';
+/**
+*
+* Airgame -  multitouch Air Hockey
+*
+*/
 
 import Fullscreen from './classes/fullscreen.js';
 
@@ -6,7 +10,7 @@ import Airgame from './classes/airgame.js';
 import Sticks from './classes/sticks.js';
 import Renderer from './classes/renderer.js';
 
-function go() {
+function start() {
     const renderer = new Renderer('renderer');
 
     const game = new Airgame(renderer);
@@ -30,4 +34,4 @@ function go() {
 }
 
 const f = new Fullscreen('world');
-      f.init(go);
+      f.init(start);
