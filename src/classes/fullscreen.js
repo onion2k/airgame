@@ -41,7 +41,7 @@ export default class Fullscreen {
 
     toggleFullscreen() {
         if (fscreen.fullscreenElement !== null) {
-          this.cb();
+            setTimeout(this.cb, 100);
         } else {
 
         }

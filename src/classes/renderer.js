@@ -1,14 +1,14 @@
 
 export default class Renderer {
 
-    constructor(id){
+    init(id){
 
         this.renderEl = document.getElementById(id);
 
         this.renderCtx = this.renderEl.getContext('2d');
         this.dimensions = this.renderEl.getBoundingClientRect();
 
-        // console.log(this.dimensions);
+        console.log("renderer", this.dimensions.width);
 
         this.renderEl.width = this.dimensions.width;
         this.renderEl.height = this.dimensions.height;

@@ -12,6 +12,8 @@ export default class Sticks {
         this.controllerCtx = this.controllerEl.getContext('2d');
         this.dimensions = this.controllerEl.getBoundingClientRect();
 
+        console.log('controller', this.dimensions.width);
+
         this.attach();
 
     }

@@ -7,13 +7,15 @@
 import Fullscreen from './classes/fullscreen.js';
 
 import Airgame from './classes/airgame.js';
-import Sticks from './classes/sticks.js';
 import Renderer from './classes/renderer.js';
+import Sticks from './classes/sticks.js';
 
 let x = 0;
 
 function start() {
-    const renderer = new Renderer('renderer');
+
+    const renderer = new Renderer;
+        renderer.init('renderer');
 
     const game = new Airgame(renderer);
           game.init('world');
@@ -33,6 +35,7 @@ function start() {
     }
     
     requestAnimationFrame(update);
+
 }
 
 const f = new Fullscreen('world');

@@ -30,6 +30,8 @@ export default class Airgame {
         this.world = document.getElementById(id);
         this.dimensions = this.world.getBoundingClientRect();
 
+        console.log("game", this.dimensions.width);
+
         this.engine = Engine.create();
         this.engine.world.gravity.x = 0;
         this.engine.world.gravity.y = 0;
