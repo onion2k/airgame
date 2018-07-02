@@ -33,5 +33,7 @@ function start() {
     requestAnimationFrame(update);
 }
 
-const f = new Fullscreen('world');
-      f.init(start);
+start();
+
+// const f = new Fullscreen('world');
+//       f.init(start);
