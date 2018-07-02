@@ -30,6 +30,8 @@ export default class Airgame {
         this.world = document.getElementById(id);
         this.dimensions = this.world.getBoundingClientRect();
 
+        console.log(this.dimensions);
+
         this.engine = Engine.create();
         this.engine.world.gravity.x = 0;
         this.engine.world.gravity.y = 0;
@@ -95,7 +97,7 @@ export default class Airgame {
             dt = now - (this.time || now);
             this.time = now;
 
-        if (dt > 18) console.log(dt);
+        // if (dt > 18) console.log(dt);
         
         Engine.update(this.engine, dt);
         let bodies = Composite.allBodies(this.engine.world);
