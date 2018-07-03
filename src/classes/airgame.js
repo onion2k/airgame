@@ -1,5 +1,10 @@
+/**
+ * 
+ * Airgame - game logic including physics
+ * 
+ */
 
-import Matter from 'matter-js';
+ import Matter from 'matter-js';
 
 let Engine = Matter.Engine,
     Composite = Matter.Composite,
@@ -31,6 +36,11 @@ export default class Airgame {
 
         this.world = document.getElementById(id);
         this.dimensions = this.world.getBoundingClientRect();
+        this.portrait = false;
+
+        if (this.dimensions.width < this.dimensions.height) {
+            this.portrait = true;
+        }
 
         this.engine = Engine.create();
         this.engine.world.gravity.x = 0;

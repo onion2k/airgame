@@ -23,7 +23,7 @@ export default class Fullscreen {
         overlay.style['alignItems'] = 'center';
         overlay.style['justifyItems'] = 'center';
 
-        overlay.textContent = "Press to go fullscreen";
+        overlay.textContent = "Press to start";
 
         document.body.appendChild(overlay);
 

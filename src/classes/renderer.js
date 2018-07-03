@@ -7,6 +7,11 @@ export default class Renderer {
 
         this.renderCtx = this.renderEl.getContext('2d');
         this.dimensions = this.renderEl.getBoundingClientRect();
+        this.portrait = false;
+
+        if (this.dimensions.width < this.dimensions.height) {
+            this.portrait = true;
+        }
 
         this.renderEl.width = this.dimensions.width;
         this.renderEl.height = this.dimensions.height;
