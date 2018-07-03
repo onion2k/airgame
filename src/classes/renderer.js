@@ -8,8 +8,6 @@ export default class Renderer {
         this.renderCtx = this.renderEl.getContext('2d');
         this.dimensions = this.renderEl.getBoundingClientRect();
 
-        console.log("renderer", this.dimensions.width);
-
         this.renderEl.width = this.dimensions.width;
         this.renderEl.height = this.dimensions.height;
 
@@ -20,18 +18,23 @@ export default class Renderer {
 
     }
 
-    render(bodies) {
+    render(data) {
 
         this.renderCtx.clearRect(0,0,this.dimensions.width,this.dimensions.height);
         this.renderCtx.strokeStyle = '#ddd';
         this.renderCtx.lineWidth = 1;
-        
+
         this.renderCtx.beginPath();
         this.renderCtx.moveTo(this.dimensions.width * 0.5, 0);
         this.renderCtx.lineTo(this.dimensions.width * 0.5, this.dimensions.height);
         this.renderCtx.stroke();
 
-        let t = bodies[0].position;
+        this.renderCtx.fillStyle = 'rgba(0,0,0,1)';
+        this.renderCtx.font = '18px sans-serif';
+        this.renderCtx.fillText(data.scores[0], this.dimensions.width * 0.25, 50);
+        this.renderCtx.fillText(data.scores[1], this.dimensions.width * 0.75, 50);
+
+        let t = data.bodies[0].position;
 
         this.renderCtx.fillStyle = 'rgba(0,0,0,0.5)';
         this.renderCtx.beginPath();
@@ -49,7 +52,7 @@ export default class Renderer {
         this.renderCtx.stroke();
 
 
-        t = bodies[1].position;
+        t = data.bodies[1].position;
 
         this.renderCtx.fillStyle = 'rgba(0,0,0,0.5)';
         this.renderCtx.beginPath();
@@ -68,7 +71,7 @@ export default class Renderer {
 
 
 
-        t = bodies[2].position;
+        t = data.bodies[2].position;
 
         this.renderCtx.fillStyle = 'rgba(0,0,0,0.5)';
         this.renderCtx.beginPath();

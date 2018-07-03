@@ -23,14 +23,14 @@ export default class Airgame {
 
     init(id) {
 
-        this.state = {};
+        this.state = {
+            scores: [0,0]
+        };
 
         this.size = 40;
 
         this.world = document.getElementById(id);
         this.dimensions = this.world.getBoundingClientRect();
-
-        console.log("game", this.dimensions.width);
 
         this.engine = Engine.create();
         this.engine.world.gravity.x = 0;
@@ -102,7 +102,9 @@ export default class Airgame {
         Engine.update(this.engine, dt);
         let bodies = Composite.allBodies(this.engine.world);
 
-        this.renderer.render(bodies);
+        let scores = this.state.scores;
+
+        this.renderer.render({scores, bodies});
     }
 
     updatePlayer(player, pos, ppos){
@@ -128,10 +130,12 @@ export default class Airgame {
                 if (!speed) { speed = -this.puck.speed; }
                 Body.setVelocity(this.puck, { x: vecNorm.x * speed, y: vecNorm.y * speed });
             } else if (pair.bodyA.label === 'goal1' || pair.bodyB.label === 'goal1') {
+                this.state.scores[1]++;
                 Matter.Body.setAngularVelocity(this.puck, 0);
                 Matter.Body.setVelocity(this.puck, {x: 0, y: 0});
                 Matter.Body.setPosition(this.puck, { x: this.dimensions.width * 0.5, y: this.dimensions.height * 0.5 });
             } else if (pair.bodyA.label === 'goal2' || pair.bodyB.label === 'goal2') {
+                this.state.scores[0]++;
                 Matter.Body.setAngularVelocity(this.puck, 0);
                 Matter.Body.setVelocity(this.puck, {x: 0, y: 0});
                 Matter.Body.setPosition(this.puck, { x: this.dimensions.width * 0.5, y: this.dimensions.height * 0.5 });
