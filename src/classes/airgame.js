@@ -109,7 +109,6 @@ export default class Airgame {
 
     updatePlayer(player, pos, ppos){
         let m = Math.abs(Matter.Vector.cross({ x: pos.x, y: pos.y }, { x: ppos.x, y: ppos.y }));
-
         player.m = m; // could replace with magnitude?
         Matter.Body.setPosition(player, pos);
     }

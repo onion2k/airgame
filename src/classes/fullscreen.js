@@ -8,7 +8,7 @@ export default class Fullscreen {
     }
 
     init(cb){
-        
+
         const overlay = document.createElement('div');
 
         overlay.style['backgroundColor'] = 'rgba(0,0,0,0.5)';
@@ -40,6 +40,7 @@ export default class Fullscreen {
     }
 
     toggleFullscreen() {
+
         if (fscreen.fullscreenElement !== null) {
             setTimeout(this.cb, 100);
         } else {
