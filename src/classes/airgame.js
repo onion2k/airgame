@@ -44,7 +44,8 @@ export default class Airgame {
     }
 
     initEvents(){
-        Events.on(this.engine, 'collisionStart', this.collision_detection.bind(this));
+        Events.on(this.engine, 'collisionStart', this.collision_start.bind(this));
+        Events.on(this.engine, 'collisionEnd', this.collision_end.bind(this));
     }
 
     initWorld(){
@@ -54,39 +55,23 @@ export default class Airgame {
         this.player1 = Bodies.circle(this.dimensions.width * 0.2, this.dimensions.height * 0.5, this.size, { label: 'player1', isStatic: true });
         this.player2 = Bodies.circle(this.dimensions.width * 0.8, this.dimensions.height * 0.5, this.size, { label: 'player2', isStatic: true });
         
-        // remove the top and bottom and replace with world boundaries?
         this.arenat = Bodies.rectangle(this.dimensions.width * 0.5, 0 - 10, this.dimensions.width + 10, 60, { isStatic: true });
         this.arenab = Bodies.rectangle(this.dimensions.width * 0.5, this.dimensions.height+10, this.dimensions.width+10, 60, { isStatic: true });
-        
-        //add 'goals' aka sensors that increment scores and reset the puck
-        this.redColor = '#C44D58',
-        this.greenColor = '#C7F464';
 
         this.goal1 = Bodies.rectangle(-30, this.dimensions.height * 0.5, 30, this.dimensions.height+10, {
             label: 'goal1', 
             isSensor: true,
-            isStatic: true,
-            render: {
-                strokeStyle: this.redColor,
-                lineWidth: 2
-            }
+            isStatic: true
         });
 
         this.goal2 = Bodies.rectangle(this.dimensions.width + 30, this.dimensions.height * 0.5, 30, this.dimensions.height+10, {
             label: 'goal2', 
             isSensor: true,
-            isStatic: true,
-            render: {
-                strokeStyle: this.redColor,
-                lineWidth: 2
-            }
+            isStatic: true
         });
 
-        // add all of the bodies to the world
         World.add(this.engine.world, [this.puck,this.player1,this.player2,this.arenat,this.arenab,this.goal1,this.goal2]);
-        
-        // run the renderer
-        // Render.run(this.render); 
+
     }
 
     render(){
@@ -96,8 +81,6 @@ export default class Airgame {
         let now = new Date().getTime(),
             dt = now - (this.time || now);
             this.time = now;
-
-        // if (dt > 18) console.log(dt);
         
         Engine.update(this.engine, dt);
         let bodies = Composite.allBodies(this.engine.world);
@@ -113,7 +96,7 @@ export default class Airgame {
         Matter.Body.setPosition(player, pos);
     }
 
-    collision_detection(event) {
+    collision_start(event) {
         var i, pair,
             length = event.pairs.length;
         for (i = 0; i < length; i++) {
@@ -140,6 +123,10 @@ export default class Airgame {
                 Matter.Body.setPosition(this.puck, { x: this.dimensions.width * 0.5, y: this.dimensions.height * 0.5 });
             }
         }
+    }
+
+    collision_end(event){
+
     }
 
 }
