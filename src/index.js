@@ -38,7 +38,7 @@ function start() {
 
 }
 
-const f = new Fullscreen('world');
+const f = new Fullscreen('fullscreen','world');
       f.init(start);
 
 // start();

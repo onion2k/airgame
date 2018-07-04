@@ -21,9 +21,36 @@
                 width: 100vw;
                 height: 100vh;
             }
+            #intro {
+                position: absolute;
+                width: 100vw;
+                height: 100vh;
+                background-color: #444;
+                display: grid;
+                grid-auto-rows: 1fr;
+                grid-template-columns: 1fr;
+                align-items: center;
+                justify-items: center;
+            }
+            button {
+                border-radius: 10px;
+                font-size: 24px;
+                padding: 15px 30px;
+                border: 1px solid #000;
+                background-color: #eee;
+                color: #444;
+                z-index: 10;
+                box-shadow: 0 10px 10px #bbb;
+            }
         </style>
     </head>
 <body>
+
+    <div id="intro">
+        <button id="start">Press to start</button>
+        <button id="fullscreen">Press to go fullscreen</button>
+    </div>
+
     <div id="world">
         <canvas id="renderer"></canvas>
         <canvas id="controller"></canvas>
