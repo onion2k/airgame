@@ -41,4 +41,8 @@ function start() {
 const f = new Fullscreen('fullscreen','world');
       f.init(start);
 
-// start();
+
+document.getElementById('start').addEventListener('click', (e)=>{
+    start();
+});
+

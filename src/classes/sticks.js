@@ -23,29 +23,40 @@ export default class Sticks {
 
     attach(){
 
-        // this.controllerEl.addEventListener('mousedown', (e) => {
-        //     e.preventDefault();
-        //     this.state.touches.push({
-        //         identifier: 0,
-        //         ix: e.pageX,
-        //         iy: e.pageY,
-        //         x: e.pageX,
-        //         y: e.pageY
-        //     });
-        // });
+        this.controllerEl.addEventListener('mousedown', (e) => {
+            e.preventDefault();
 
-        // this.controllerEl.addEventListener('mousemove', (e) => {
-        //     e.preventDefault();
-        //     if (this.state.touches.length > 0) {
-        //         this.state.touches[0].x = e.pageX;
-        //         this.state.touches[0].y = e.pageY;
-        //     }
-        // });
+            let player = 1;
 
-        // this.controllerEl.addEventListener('mouseup', (e) => {
-        //     e.preventDefault();
-        //     this.state.touches = [];
-        // });
+            if (e.pageX > this.dimensions.width * 0.5) {
+                player = 2;
+            }
+
+            this.state.touches.push({
+                player: player,
+                ix: e.pageX,
+                iy: e.pageY,
+                px: e.pageX,
+                py: e.pagey,
+                x: e.pageX,
+                y: e.pageY
+            });
+        });
+
+        this.controllerEl.addEventListener('mousemove', (e) => {
+            e.preventDefault();
+            if (this.state.touches.length > 0) {
+                this.state.touches[0].px = this.state.touches[0].x;
+                this.state.touches[0].py = this.state.touches[0].y;
+                this.state.touches[0].x = e.pageX;
+                this.state.touches[0].y = e.pageY;
+            }
+        });
+
+        this.controllerEl.addEventListener('mouseup', (e) => {
+            e.preventDefault();
+            this.state.touches = [];
+        });
 
         this.controllerEl.addEventListener('touchstart', (e) => {
             e.preventDefault();

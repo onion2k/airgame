@@ -115,11 +115,13 @@ export default class Airgame {
                 var vecNorm = Matter.Vector.normalise(Matter.Vector.sub(this.player1.position, this.puck.position));
                 let speed = -(this.puck.speed + Math.log(this.player1.m / 2));
                 if (!speed) { speed = -this.puck.speed; }
+                if (speed > 20) { speed = 20; }
                 Body.setVelocity(this.puck, { x: vecNorm.x * speed, y: vecNorm.y * speed });
             } else if (pair.bodyA.label === 'player2' || pair.bodyB.label === 'player2') {
                 var vecNorm = Matter.Vector.normalise(Matter.Vector.sub(this.player2.position, this.puck.position));
                 let speed = -(this.puck.speed + Math.log(this.player2.m / 2));
                 if (!speed) { speed = -this.puck.speed; }
+                if (speed > 20) { speed = 20; }
                 Body.setVelocity(this.puck, { x: vecNorm.x * speed, y: vecNorm.y * speed });
             } else if (pair.bodyA.label === 'goal1' || pair.bodyB.label === 'goal1') {
                 this.state.scores[1]++;
