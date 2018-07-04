@@ -33,7 +33,6 @@ export default class Fullscreen {
                 fscreen.addEventListener('fullscreenchange', this.toggleFullscreen.bind(this), false);
                 fscreen.requestFullscreen(this.fsEl);
             }
-            document.body.removeChild(this.startEl);
         });
 
         this.cb = cb;

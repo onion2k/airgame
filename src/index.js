@@ -14,6 +14,8 @@ let x = 0;
 
 function start() {
 
+    document.body.removeChild(document.getElementById('intro'));
+
     const renderer = new Renderer;
         renderer.init('renderer');
 
@@ -40,7 +42,6 @@ function start() {
 
 const f = new Fullscreen('fullscreen','world');
       f.init(start);
-
 
 document.getElementById('start').addEventListener('click', (e)=>{
     start();
