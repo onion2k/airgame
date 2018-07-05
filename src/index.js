@@ -10,11 +10,9 @@ import Airgame from './classes/airgame.js';
 import Renderer from './classes/renderer.js';
 import Sticks from './classes/sticks.js';
 
-let x = 0;
-
 function start() {
 
-    document.body.removeChild(document.getElementById('intro'));
+    document.body.removeChild(document.getElementById('introscreen'));
 
     const renderer = new Renderer;
         renderer.init('renderer');

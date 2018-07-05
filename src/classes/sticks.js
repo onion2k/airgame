@@ -11,11 +11,6 @@ export default class Sticks {
 
         this.controllerCtx = this.controllerEl.getContext('2d');
         this.dimensions = this.controllerEl.getBoundingClientRect();
-        this.portrait = false;
-
-        if (this.dimensions.width < this.dimensions.height) {
-            this.portrait = true;
-        }
 
         this.attach();
 
