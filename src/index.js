@@ -15,7 +15,7 @@ function start() {
     document.body.removeChild(document.getElementById('introscreen'));
 
     const renderer = new Renderer;
-        renderer.init('renderer');
+        renderer.init('renderer2D', 'renderer3D');
 
     const game = new Airgame(renderer);
           game.init('world');

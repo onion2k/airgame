@@ -1,18 +1,35 @@
 
 export default class Renderer {
 
-    init(id){
+    init(id2D,id3D){
 
-        this.renderEl = document.getElementById(id);
 
-        this.renderCtx = this.renderEl.getContext('2d');
+        this.renderEl = document.getElementById(id2D);
+
+        this.render2Dctx = this.renderEl.getContext('2d');
         this.dimensions = this.renderEl.getBoundingClientRect();
 
         this.renderEl.width = this.dimensions.width;
         this.renderEl.height = this.dimensions.height;
 
-        this.renderCtx.width = this.dimensions.width;
-        this.renderCtx.height = this.dimensions.height;
+        this.render2Dctx.width = this.dimensions.width;
+        this.render2Dctx.height = this.dimensions.height;
+
+        this.renderEl.style['pointer-events'] = "none";
+
+
+
+
+        this.renderEl = document.getElementById(id3D);
+
+        this.render3DCtx = this.renderEl.getContext('webgl');
+        this.dimensions = this.renderEl.getBoundingClientRect();
+
+        this.renderEl.width = this.dimensions.width;
+        this.renderEl.height = this.dimensions.height;
+
+        this.render3DCtx.width = this.dimensions.width;
+        this.render3DCtx.height = this.dimensions.height;
 
         this.renderEl.style['pointer-events'] = "none";
 
@@ -20,73 +37,75 @@ export default class Renderer {
 
     render(data) {
 
-        this.renderCtx.clearRect(0,0,this.dimensions.width,this.dimensions.height);
-        this.renderCtx.strokeStyle = '#ddd';
-        this.renderCtx.lineWidth = 1;
+        let size = 30;
 
-        this.renderCtx.beginPath();
-        this.renderCtx.moveTo(0, this.dimensions.height * 0.5);
-        this.renderCtx.lineTo(this.dimensions.width, this.dimensions.height * 0.5);
-        this.renderCtx.stroke();
+        this.render2Dctx.clearRect(0,0,this.dimensions.width,this.dimensions.height);
+        this.render2Dctx.strokeStyle = '#ddd';
+        this.render2Dctx.lineWidth = 1;
 
-        this.renderCtx.fillStyle = 'rgba(0,0,0,1)';
-        this.renderCtx.font = '18px sans-serif';
-        this.renderCtx.fillText(data.scores[0], 50, 50);
-        this.renderCtx.fillText(data.scores[1], this.dimensions.width - 50, this.dimensions.height - 50);
+        this.render2Dctx.beginPath();
+        this.render2Dctx.moveTo(0, this.dimensions.height * 0.5);
+        this.render2Dctx.lineTo(this.dimensions.width, this.dimensions.height * 0.5);
+        this.render2Dctx.stroke();
+
+        this.render2Dctx.fillStyle = 'rgba(0,0,0,1)';
+        this.render2Dctx.font = '18px sans-serif';
+        this.render2Dctx.fillText(data.scores[0], 50, 50);
+        this.render2Dctx.fillText(data.scores[1], this.dimensions.width - 50, this.dimensions.height - 50);
 
         let t = data.bodies[0].position;
 
-        this.renderCtx.fillStyle = 'rgba(0,0,0,0.5)';
-        this.renderCtx.beginPath();
-        this.renderCtx.arc(t.x, t.y, 40, 0, 2*Math.PI);
-        this.renderCtx.fill();
+        this.render2Dctx.fillStyle = 'rgba(0,0,0,0.5)';
+        this.render2Dctx.beginPath();
+        this.render2Dctx.arc(t.x, t.y, size, 0, 2*Math.PI);
+        this.render2Dctx.fill();
 
-        this.renderCtx.fillStyle = '#888';
+        this.render2Dctx.fillStyle = '#888';
 
-        this.renderCtx.beginPath();
-        this.renderCtx.arc(t.x, t.y, 40, 0, 2*Math.PI);
-        this.renderCtx.fill();
+        this.render2Dctx.beginPath();
+        this.render2Dctx.arc(t.x, t.y, size, 0, 2*Math.PI);
+        this.render2Dctx.fill();
 
-        this.renderCtx.strokeStyle = '#444';
-        this.renderCtx.lineWidth = 2;
-        this.renderCtx.stroke();
+        this.render2Dctx.strokeStyle = '#444';
+        this.render2Dctx.lineWidth = 2;
+        this.render2Dctx.stroke();
 
 
         t = data.bodies[1].position;
 
-        this.renderCtx.fillStyle = 'rgba(0,0,0,0.5)';
-        this.renderCtx.beginPath();
-        this.renderCtx.arc(t.x, t.y, 40, 0, 2*Math.PI);
-        this.renderCtx.fill();
+        this.render2Dctx.fillStyle = 'rgba(0,0,0,0.5)';
+        this.render2Dctx.beginPath();
+        this.render2Dctx.arc(t.x, t.y, size, 0, 2*Math.PI);
+        this.render2Dctx.fill();
 
-        this.renderCtx.fillStyle = '#8f8';
+        this.render2Dctx.fillStyle = '#8f8';
 
-        this.renderCtx.beginPath();
-        this.renderCtx.arc(t.x, t.y, 40, 0, 2*Math.PI);
-        this.renderCtx.fill();
+        this.render2Dctx.beginPath();
+        this.render2Dctx.arc(t.x, t.y, size, 0, 2*Math.PI);
+        this.render2Dctx.fill();
 
-        this.renderCtx.strokeStyle = '#444';
-        this.renderCtx.lineWidth = 2;
-        this.renderCtx.stroke();
+        this.render2Dctx.strokeStyle = '#444';
+        this.render2Dctx.lineWidth = 2;
+        this.render2Dctx.stroke();
 
 
 
         t = data.bodies[2].position;
 
-        this.renderCtx.fillStyle = 'rgba(0,0,0,0.5)';
-        this.renderCtx.beginPath();
-        this.renderCtx.arc(t.x, t.y, 40, 0, 2*Math.PI);
-        this.renderCtx.fill();
+        this.render2Dctx.fillStyle = 'rgba(0,0,0,0.5)';
+        this.render2Dctx.beginPath();
+        this.render2Dctx.arc(t.x, t.y, size, 0, 2*Math.PI);
+        this.render2Dctx.fill();
 
-        this.renderCtx.fillStyle = '#f88';
+        this.render2Dctx.fillStyle = '#f88';
 
-        this.renderCtx.beginPath();
-        this.renderCtx.arc(t.x, t.y, 40, 0, 2*Math.PI);
-        this.renderCtx.fill();
+        this.render2Dctx.beginPath();
+        this.render2Dctx.arc(t.x, t.y, size, 0, 2*Math.PI);
+        this.render2Dctx.fill();
 
-        this.renderCtx.strokeStyle = '#444';
-        this.renderCtx.lineWidth = 2;
-        this.renderCtx.stroke();
+        this.render2Dctx.strokeStyle = '#444';
+        this.render2Dctx.lineWidth = 2;
+        this.render2Dctx.stroke();
 
     }
 
