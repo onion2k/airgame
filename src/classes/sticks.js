@@ -23,7 +23,7 @@ export default class Sticks {
 
             let player = 1;
 
-            if (e.pageX > this.dimensions.width * 0.5) {
+            if (e.pageY > this.dimensions.height * 0.5) {
                 player = 2;
             }
 
@@ -57,7 +57,7 @@ export default class Sticks {
             e.preventDefault();
             for (let i = 0; i < e.changedTouches.length; i++) {
                 let player = 1;
-                if (e.changedTouches[i].pageX > this.dimensions.width * 0.5) {
+                if (e.changedTouches[i].pageY > this.dimensions.height * 0.5) {
                     player = 2;
                 }
                 this.state.touches.push({

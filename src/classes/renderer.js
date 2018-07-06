@@ -25,14 +25,14 @@ export default class Renderer {
         this.renderCtx.lineWidth = 1;
 
         this.renderCtx.beginPath();
-        this.renderCtx.moveTo(this.dimensions.width * 0.5, 0);
-        this.renderCtx.lineTo(this.dimensions.width * 0.5, this.dimensions.height);
+        this.renderCtx.moveTo(0, this.dimensions.height * 0.5);
+        this.renderCtx.lineTo(this.dimensions.width, this.dimensions.height * 0.5);
         this.renderCtx.stroke();
 
         this.renderCtx.fillStyle = 'rgba(0,0,0,1)';
         this.renderCtx.font = '18px sans-serif';
-        this.renderCtx.fillText(data.scores[0], this.dimensions.width * 0.25, 50);
-        this.renderCtx.fillText(data.scores[1], this.dimensions.width * 0.75, 50);
+        this.renderCtx.fillText(data.scores[0], 50, 50);
+        this.renderCtx.fillText(data.scores[1], this.dimensions.width - 50, this.dimensions.height - 50);
 
         let t = data.bodies[0].position;
 

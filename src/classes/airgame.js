@@ -32,7 +32,7 @@ export default class Airgame {
             scores: [0,0]
         };
 
-        this.size = 40;
+        this.size = 30;
 
         this.world = document.getElementById(id);
         this.dimensions = this.world.getBoundingClientRect();
@@ -55,21 +55,21 @@ export default class Airgame {
 
     initWorld(){
 
-        this.puck = Bodies.circle(this.dimensions.width * 0.5, this.dimensions.height * 0.5, 40, { label: 'puck', friction: 0, frictionAir: 0.005, speed: 0, restitution: 0.95 });
+        this.puck = Bodies.circle(this.dimensions.width * 0.5, this.dimensions.height * 0.5, this.size, { label: 'puck', friction: 0, frictionAir: 0.005, speed: 0, restitution: 0.95 });
 
-        this.player1 = Bodies.circle(this.dimensions.width * 0.2, this.dimensions.height * 0.5, this.size, { label: 'player1', isStatic: true });
-        this.player2 = Bodies.circle(this.dimensions.width * 0.8, this.dimensions.height * 0.5, this.size, { label: 'player2', isStatic: true });
+        this.player1 = Bodies.circle(this.dimensions.width * 0.5, this.dimensions.height * 0.1, this.size, { label: 'player1', isStatic: true });
+        this.player2 = Bodies.circle(this.dimensions.width * 0.5, this.dimensions.height * 0.9, this.size, { label: 'player2', isStatic: true });
         
-        this.arenat = Bodies.rectangle(this.dimensions.width * 0.5, 0 - 10, this.dimensions.width + 10, 60, { isStatic: true });
-        this.arenab = Bodies.rectangle(this.dimensions.width * 0.5, this.dimensions.height+10, this.dimensions.width+10, 60, { isStatic: true });
-
-        this.goal1 = Bodies.rectangle(-30, this.dimensions.height * 0.5, 30, this.dimensions.height+10, {
+        this.arenat = Bodies.rectangle(-10, this.dimensions.height * 0.5, 60, this.dimensions.height + 10, { isStatic: true });
+        this.arenab = Bodies.rectangle(this.dimensions.width + 10, this.dimensions.height * 0.5, 60, this.dimensions.height + 10, { isStatic: true });
+                                       
+        this.goal1 = Bodies.rectangle(this.dimensions.width * 0.5, -30, this.dimensions.width+10, 30, {
             label: 'goal1', 
             isSensor: true,
             isStatic: true
         });
 
-        this.goal2 = Bodies.rectangle(this.dimensions.width + 30, this.dimensions.height * 0.5, 30, this.dimensions.height+10, {
+        this.goal2 = Bodies.rectangle(this.dimensions.width * 0.5, this.dimensions.height + 30, this.dimensions.width+10, 30, {
             label: 'goal2', 
             isSensor: true,
             isStatic: true
