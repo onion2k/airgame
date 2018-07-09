@@ -101,6 +101,12 @@ export default class Airgame {
         Matter.Body.setPosition(player, pos);
     }
 
+    throwin(){
+        Matter.Body.setPosition(this.puck, { x: this.dimensions.width * 0.2, y: this.dimensions.height * 0.5 });
+        Matter.Body.setAngularVelocity(this.puck, 0);
+        Matter.Body.setVelocity(this.puck, {x: 4.0, y: -8.0});
+    }
+
     collision_start(event) {
         var i, pair,
             length = event.pairs.length;
@@ -120,14 +126,16 @@ export default class Airgame {
                 Body.setVelocity(this.puck, { x: vecNorm.x * speed, y: vecNorm.y * speed });
             } else if (pair.bodyA.label === 'goal1' || pair.bodyB.label === 'goal1') {
                 this.state.scores[1]++;
-                Matter.Body.setAngularVelocity(this.puck, 0);
-                Matter.Body.setVelocity(this.puck, {x: 0, y: 0});
-                Matter.Body.setPosition(this.puck, { x: this.dimensions.width * 0.5, y: this.dimensions.height * 0.5 });
+                this.throwin();
+                // Matter.Body.setAngularVelocity(this.puck, 0);
+                // Matter.Body.setVelocity(this.puck, {x: 0, y: 0});
+                // Matter.Body.setPosition(this.puck, { x: this.dimensions.width * 0.5, y: this.dimensions.height * 0.5 });
             } else if (pair.bodyA.label === 'goal2' || pair.bodyB.label === 'goal2') {
                 this.state.scores[0]++;
-                Matter.Body.setAngularVelocity(this.puck, 0);
-                Matter.Body.setVelocity(this.puck, {x: 0, y: 0});
-                Matter.Body.setPosition(this.puck, { x: this.dimensions.width * 0.5, y: this.dimensions.height * 0.5 });
+                this.throwin();
+                // Matter.Body.setAngularVelocity(this.puck, 0);
+                // Matter.Body.setVelocity(this.puck, {x: 0, y: 0});
+                // Matter.Body.setPosition(this.puck, { x: this.dimensions.width * 0.5, y: this.dimensions.height * 0.5 });
             }
         }
     }
