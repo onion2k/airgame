@@ -81,6 +81,10 @@ export default class Sticks {
                         index = j;
                     }
                 }
+
+                if ((this.state.touches[index].player===1 && e.changedTouches[i].pageY > this.dimensions.height * 0.45) || (this.state.touches[index].player===2 && e.changedTouches[i].pageY < this.dimensions.height * 0.55)) {
+                    return;
+                }
                 this.state.touches[index].px = this.state.touches[index].x;
                 this.state.touches[index].py = this.state.touches[index].y;
                 this.state.touches[index].x = e.changedTouches[i].pageX;

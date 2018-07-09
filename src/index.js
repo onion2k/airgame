@@ -44,4 +44,3 @@ const f = new Fullscreen('fullscreen','world');
 document.getElementById('start').addEventListener('click', (e)=>{
     start();
 });
-
