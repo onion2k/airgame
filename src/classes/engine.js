@@ -4,7 +4,7 @@
  * 
  */
 
- import Matter from 'matter-js';
+import Matter from 'matter-js';
 
 let Engine = Matter.Engine,
     Composite = Matter.Composite,
@@ -15,7 +15,7 @@ let Engine = Matter.Engine,
 
 Matter.Resolver._restingThresh = 0.1;
 
-export default class Airgame {
+export default class Airgame_Engine {
 
     constructor(renderer){
 

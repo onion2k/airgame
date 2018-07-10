@@ -1,5 +1,5 @@
 
-export default class Sticks {
+export default class Airgame_Sticks {
 
     init(id){
 

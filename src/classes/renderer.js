@@ -1,5 +1,5 @@
 
-export default class Renderer {
+export default class Airgame_Renderer {
 
     init(id2D,id3D){
 
