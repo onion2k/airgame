@@ -13,7 +13,7 @@ let Engine = Matter.Engine,
     Body = Matter.Body,
     Events = Matter.Events;
 
-Matter.Resolver._restingThresh = 0.1;
+// Matter.Resolver._restingThresh = 0.1;
 
 export default class Airgame_Engine {
 
@@ -31,6 +31,8 @@ export default class Airgame_Engine {
         this.state = {
             scores: [0,0]
         };
+
+        console.log(id)
 
         this.size = 30;
 

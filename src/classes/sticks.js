@@ -1,11 +1,13 @@
 
 export default class Airgame_Sticks {
 
-    init(id){
+    constructor(id){
 
         this.state = {
             touches: [],
         };
+
+        console.log(id)
 
         this.controllerEl = document.getElementById(id);
 
