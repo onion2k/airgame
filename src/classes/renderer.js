@@ -1,4 +1,6 @@
 
+import TWGL from 'twgl.js';
+
 export default class Airgame_Renderer {
 
     init(id2D,id3D){

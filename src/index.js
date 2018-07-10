@@ -9,8 +9,6 @@ import Airgame_Engine from './classes/engine.js';
 import Airgame_Renderer from './classes/renderer.js';
 import Airgame_Sticks from './classes/sticks.js';
 
-console.log({Airgame_Fullscreen,Airgame_Engine,Airgame_Renderer,Airgame_ticks});
-
 function start() {
 
     document.body.removeChild(document.getElementById('introscreen'));

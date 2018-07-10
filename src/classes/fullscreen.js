@@ -1,5 +1,5 @@
 
-import fscreen from '../../../../Library/Caches/typescript/2.9/node_modules/@types/fscreen';
+import fscreen from 'fscreen';
 
 export default class Airgame_Fullscreen {
 
