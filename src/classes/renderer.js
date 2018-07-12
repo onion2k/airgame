@@ -34,6 +34,66 @@ export default class Airgame_Renderer {
 
     }
 
+
+    // background(){
+
+    //     var mX=1, mY=1;
+    //     var canvas = document.getElementById("c");
+    //     var rect = canvas.getBoundingClientRect();
+        
+    //     var save = false;
+    //     var recording = false;
+        
+    //     var gl = twgl.getWebGLContext(canvas);
+    //     var programInfo = twgl.createProgramInfo(gl, ["vs", "fs"]);
+        
+    //     var arrays = {
+    //       position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0],
+    //     };
+        
+    //     var bufferInfo = twgl.createBufferInfoFromArrays(gl, arrays);
+
+    //     requestAnimationFrame(render);
+
+    // }
+
+
+    // render3D(time) {
+      
+    //     twgl.resizeCanvasToDisplaySize(gl.canvas);
+      
+    //     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+      
+    //     var uniforms = {
+    //       u_time: time * 0.001,
+    //       u_mouse: [mX,mY],
+    //       u_resolution: [gl.canvas.width, gl.canvas.height],
+    //     };
+      
+    //     gl.useProgram(programInfo.program);
+      
+    //     twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
+    //     twgl.setUniforms(programInfo, uniforms);
+    //     twgl.drawBufferInfo(gl, bufferInfo);
+      
+    //       stats.end();
+      
+    //     requestAnimationFrame(render);
+      
+    //     if (save && recording) {
+    //       save = false;
+    //       recording = false;
+    //       capturer.stop();
+    //       capturer.save();
+    //     }
+      
+    //     if (recording) {
+    //       capturer.capture( gl.canvas );
+    //     }
+      
+    //   }
+      
+
     render(data) {
 
         let size = 30;
