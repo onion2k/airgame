@@ -7,12 +7,12 @@ export default class Airgame_Sticks {
             touches: [],
         };
 
-        console.log(id)
-
         this.controllerEl = document.getElementById(id);
 
-        this.controllerCtx = this.controllerEl.getContext('2d');
+        // this.controllerCtx = this.controllerEl.getContext('2d');
         this.dimensions = this.controllerEl.getBoundingClientRect();
+
+        console.log(this.controllerEl, id, this.dimensions)
 
         this.attach();
 

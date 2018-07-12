@@ -21,7 +21,7 @@ function start() {
     const game = new Airgame_Engine(renderer);
           game.init('world');
     
-    const sticks = new Airgame_Sticks('controller');
+    const sticks = new Airgame_Sticks('renderer2D');
     
     function update() {
         sticks.state.touches.forEach((t,i)=>{

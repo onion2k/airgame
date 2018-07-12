@@ -17,9 +17,6 @@ export default class Airgame_Renderer {
         this.render2Dctx.width = this.dimensions.width;
         this.render2Dctx.height = this.dimensions.height;
 
-        this.renderEl.style['pointer-events'] = "none";
-
-
 
 
         this.renderEl = document.getElementById(id3D);

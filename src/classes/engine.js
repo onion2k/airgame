@@ -32,8 +32,6 @@ export default class Airgame_Engine {
             scores: [0,0]
         };
 
-        console.log(id)
-
         this.size = 30;
 
         this.world = document.getElementById(id);
