@@ -21,8 +21,7 @@ export default class Airgame_Engine {
 
         this.render = this.render.bind(this);
         this.renderer = renderer;
-
-        this.time = 0;
+        this.elapsed = 0;
 
     }
 
@@ -86,13 +85,15 @@ export default class Airgame_Engine {
         let now = new Date().getTime(),
             dt = now - (this.time || now);
             this.time = now;
+
+        this.elapsed += dt;
         
         Engine.update(this.engine, dt);
         let bodies = Composite.allBodies(this.engine.world);
 
         let scores = this.state.scores;
 
-        this.renderer.render({scores, bodies});
+        this.renderer.render({scores, bodies, dt, time: this.elapsed});
     }
 
     updatePlayer(player, pos, ppos){

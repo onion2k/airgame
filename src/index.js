@@ -9,8 +9,6 @@ import Airgame_Renderer from './classes/renderer.js';
 import Airgame_Sticks from './classes/sticks.js';
 import Airgame_Fullscreen from './classes/fullscreen.js';
 
-console.log({Airgame_Engine, Airgame_Renderer, Airgame_Sticks});
-
 function start() {
 
     document.body.removeChild(document.getElementById('introscreen'));
@@ -38,9 +36,11 @@ function start() {
 
 }
 
-const f = new Airgame_Fullscreen('fullscreen','world');
-      f.init(start);
+// const f = new Airgame_Fullscreen('fullscreen','world');
+//       f.init(start);
 
-document.getElementById('start').addEventListener('click', (e)=>{
-    start();
-});
+// document.getElementById('start').addEventListener('click', (e)=>{
+//     start();
+// });
+
+start();

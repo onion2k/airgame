@@ -1,97 +1,71 @@
 
-import TWGL from 'twgl.js';
+import * as twgl from 'twgl.js';
 
 export default class Airgame_Renderer {
 
     init(id2D,id3D){
 
+        this.id2D = id2D;
+        this.id3D = id3D;
 
-        this.renderEl = document.getElementById(id2D);
+        this.render2DEl = document.getElementById(this.id2D);
 
-        this.render2Dctx = this.renderEl.getContext('2d');
-        this.dimensions = this.renderEl.getBoundingClientRect();
+        this.render2Dctx = this.render2DEl.getContext('2d');
+        this.dimensions = this.render2DEl.getBoundingClientRect();
 
-        this.renderEl.width = this.dimensions.width;
-        this.renderEl.height = this.dimensions.height;
+        this.render2DEl.width = this.dimensions.width;
+        this.render2DEl.height = this.dimensions.height;
 
         this.render2Dctx.width = this.dimensions.width;
         this.render2Dctx.height = this.dimensions.height;
 
+        this.time = 0;
 
-
-        this.renderEl = document.getElementById(id3D);
-
-        this.render3DCtx = this.renderEl.getContext('webgl');
-        this.dimensions = this.renderEl.getBoundingClientRect();
-
-        this.renderEl.width = this.dimensions.width;
-        this.renderEl.height = this.dimensions.height;
-
-        this.render3DCtx.width = this.dimensions.width;
-        this.render3DCtx.height = this.dimensions.height;
-
-        this.renderEl.style['pointer-events'] = "none";
+        this.background();
 
     }
 
 
-    // background(){
+    background(){
 
-    //     var mX=1, mY=1;
-    //     var canvas = document.getElementById("c");
-    //     var rect = canvas.getBoundingClientRect();
+        this.render3DEl = document.getElementById(this.id3D);
+
+        this.render3DEl.width = this.dimensions.width;
+        this.render3DEl.height = this.dimensions.height;
+
+        this.render3DEl.style['pointer-events'] = "none";
+
+        this.render3DCtx = twgl.getWebGLContext(this.render3DEl);
+        this.programInfo = twgl.createProgramInfo(this.render3DCtx, ["vs", "fs"]);
         
-    //     var save = false;
-    //     var recording = false;
+        this.arrays = {
+          position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0],
+        };
         
-    //     var gl = twgl.getWebGLContext(canvas);
-    //     var programInfo = twgl.createProgramInfo(gl, ["vs", "fs"]);
-        
-    //     var arrays = {
-    //       position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0],
-    //     };
-        
-    //     var bufferInfo = twgl.createBufferInfoFromArrays(gl, arrays);
+        this.bufferInfo = twgl.createBufferInfoFromArrays(this.render3DCtx, this.arrays);
 
-    //     requestAnimationFrame(render);
+        this.render3D(1);
 
-    // }
+    }
 
-
-    // render3D(time) {
+    render3D(time) {
       
-    //     twgl.resizeCanvasToDisplaySize(gl.canvas);
+        twgl.resizeCanvasToDisplaySize(this.render3DCtx.canvas);
       
-    //     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+        this.render3DCtx.viewport(0, 0, this.render3DCtx.canvas.width, this.render3DCtx.canvas.height);
       
-    //     var uniforms = {
-    //       u_time: time * 0.001,
-    //       u_mouse: [mX,mY],
-    //       u_resolution: [gl.canvas.width, gl.canvas.height],
-    //     };
+        let uniforms = {
+          u_time: time * 0.001,
+          u_resolution: [this.render3DCtx.canvas.width, this.render3DCtx.canvas.height],
+        };
       
-    //     gl.useProgram(programInfo.program);
+        this.render3DCtx.useProgram(this.programInfo.program);
       
-    //     twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo);
-    //     twgl.setUniforms(programInfo, uniforms);
-    //     twgl.drawBufferInfo(gl, bufferInfo);
-      
-    //       stats.end();
-      
-    //     requestAnimationFrame(render);
-      
-    //     if (save && recording) {
-    //       save = false;
-    //       recording = false;
-    //       capturer.stop();
-    //       capturer.save();
-    //     }
-      
-    //     if (recording) {
-    //       capturer.capture( gl.canvas );
-    //     }
-      
-    //   }
+        twgl.setBuffersAndAttributes(this.render3DCtx, this.programInfo, this.bufferInfo);
+        twgl.setUniforms(this.programInfo, uniforms);
+        twgl.drawBufferInfo(this.render3DCtx, this.bufferInfo);
+                  
+      }
       
 
     render(data) {
@@ -165,6 +139,8 @@ export default class Airgame_Renderer {
         this.render2Dctx.strokeStyle = '#444';
         this.render2Dctx.lineWidth = 2;
         this.render2Dctx.stroke();
+
+        this.render3D(data.time);
 
     }
 
