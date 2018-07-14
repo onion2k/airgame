@@ -18,4 +18,6 @@ Currently using a basic canvas renderer but that'll be replaced with a TWGL + GL
 
 * Wait for two players before interactive
 * Online play
-* GLSL SDF renderer
+* GLSL 3D view
+* SDF puck renderer
+* Collision particles
