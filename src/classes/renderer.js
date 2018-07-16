@@ -1,7 +1,8 @@
 
 import * as twgl from 'twgl.js';
-import fs from './fs.glsl';
-import vs from './vs.glsl';
+
+import fragmentShader from '../shaders/shader_fs.glsl';
+import vertexShader from '../shaders/shader_vs.glsl';
 
 export default class Airgame_Renderer {
 
@@ -38,7 +39,7 @@ export default class Airgame_Renderer {
         this.render3DEl.style['pointer-events'] = "none";
 
         this.render3DCtx = twgl.getWebGLContext(this.render3DEl);
-        this.programInfo = twgl.createProgramInfo(this.render3DCtx, [vs, fs]);
+        this.programInfo = twgl.createProgramInfo(this.render3DCtx, [vertexShader, fragmentShader]);
         
         this.arrays = {
           position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0],
