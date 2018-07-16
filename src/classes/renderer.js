@@ -35,7 +35,6 @@ export default class Airgame_Renderer {
 
         this.render3DEl.width = this.dimensions.width;
         this.render3DEl.height = this.dimensions.height;
-
         this.render3DEl.style['pointer-events'] = "none";
 
         this.render3DCtx = twgl.getWebGLContext(this.render3DEl);
@@ -96,7 +95,7 @@ export default class Airgame_Renderer {
         this.render2Dctx.arc(t.x, t.y, size, 0, 2*Math.PI);
         this.render2Dctx.fill();
 
-        this.render2Dctx.fillStyle = '#888';
+        this.render2Dctx.fillStyle = '#fff';
 
         this.render2Dctx.beginPath();
         this.render2Dctx.arc(t.x, t.y, size, 0, 2*Math.PI);
