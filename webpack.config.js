@@ -18,6 +18,14 @@
         template: './src/index.html'
       })
     ],
+    module: {
+      rules: [
+        {
+          test: /\.glsl$/,
+          use: 'raw-loader'
+        }
+      ]
+    },
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist')
