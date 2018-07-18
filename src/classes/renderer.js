@@ -28,7 +28,6 @@ export default class Airgame_Renderer {
 
     }
 
-
     background(){
 
         this.render3DEl = document.getElementById(this.id3D);
@@ -46,30 +45,39 @@ export default class Airgame_Renderer {
         
         this.bufferInfo = twgl.createBufferInfoFromArrays(this.render3DCtx, this.arrays);
 
-        this.render3D(1);
+        this.render3D();
 
     }
 
-    render3D(time) {
+    render3D(data) {
+
+        if (!data) {
+            data = {
+                time: 1,
+                bodies: [{position:{x:1, y:1}}],
+                resolution: [this.render3DCtx.canvas.width, this.render3DCtx.canvas.height]
+            }
+        }
+
+        let time = data.time;
       
         twgl.resizeCanvasToDisplaySize(this.render3DCtx.canvas);
       
-        this.render3DCtx.viewport(0, 0, this.render3DCtx.canvas.width, this.render3DCtx.canvas.height);
-      
         let uniforms = {
           u_time: time * 0.001,
+          u_puck: [data.bodies[0].position.x, data.bodies[0].position.y],
           u_resolution: [this.render3DCtx.canvas.width, this.render3DCtx.canvas.height],
         };
-      
+
+        this.render3DCtx.viewport(0, 0, this.render3DCtx.canvas.width, this.render3DCtx.canvas.height);
         this.render3DCtx.useProgram(this.programInfo.program);
-      
+            
         twgl.setBuffersAndAttributes(this.render3DCtx, this.programInfo, this.bufferInfo);
         twgl.setUniforms(this.programInfo, uniforms);
         twgl.drawBufferInfo(this.render3DCtx, this.bufferInfo);
                   
-      }
+    }
       
-
     render(data) {
 
         let size = 30;
@@ -142,7 +150,7 @@ export default class Airgame_Renderer {
         this.render2Dctx.lineWidth = 2;
         this.render2Dctx.stroke();
 
-        this.render3D(data.time);
+        this.render3D(data);
 
     }
 
