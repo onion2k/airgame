@@ -27,7 +27,7 @@ void main()
 
     uv -= pv;
 
-    float c = circle(uv, 0.025);
+    float c = circle(uv, 0.02);
 
     c = aastep(0.025, c);
 

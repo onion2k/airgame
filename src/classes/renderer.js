@@ -65,7 +65,7 @@ export default class Airgame_Renderer {
       
         let uniforms = {
           u_time: time * 0.001,
-          u_puck: [data.bodies[0].position.x, data.bodies[0].position.y],
+          u_puck: [this.render3DCtx.canvas.width - data.bodies[0].position.x, data.bodies[0].position.y],
           u_resolution: [this.render3DCtx.canvas.width, this.render3DCtx.canvas.height],
         };
 
@@ -96,25 +96,25 @@ export default class Airgame_Renderer {
         this.render2Dctx.fillText(data.scores[0], 50, 50);
         this.render2Dctx.fillText(data.scores[1], this.dimensions.width - 50, this.dimensions.height - 50);
 
-        let t = data.bodies[0].position;
+        // let t = data.bodies[0].position;
 
-        this.render2Dctx.fillStyle = 'rgba(0,0,0,0.5)';
-        this.render2Dctx.beginPath();
-        this.render2Dctx.arc(t.x, t.y, size, 0, 2*Math.PI);
-        this.render2Dctx.fill();
+        // this.render2Dctx.fillStyle = 'rgba(0,0,0,0.5)';
+        // this.render2Dctx.beginPath();
+        // this.render2Dctx.arc(t.x, t.y, size, 0, 2*Math.PI);
+        // this.render2Dctx.fill();
 
-        this.render2Dctx.fillStyle = '#fff';
+        // this.render2Dctx.fillStyle = '#fff';
 
-        this.render2Dctx.beginPath();
-        this.render2Dctx.arc(t.x, t.y, size, 0, 2*Math.PI);
-        this.render2Dctx.fill();
+        // this.render2Dctx.beginPath();
+        // this.render2Dctx.arc(t.x, t.y, size, 0, 2*Math.PI);
+        // this.render2Dctx.fill();
 
-        this.render2Dctx.strokeStyle = '#444';
-        this.render2Dctx.lineWidth = 2;
-        this.render2Dctx.stroke();
+        // this.render2Dctx.strokeStyle = '#444';
+        // this.render2Dctx.lineWidth = 2;
+        // this.render2Dctx.stroke();
 
 
-        t = data.bodies[1].position;
+        let t = data.bodies[1].position;
 
         this.render2Dctx.fillStyle = 'rgba(0,0,0,0.5)';
         this.render2Dctx.beginPath();
